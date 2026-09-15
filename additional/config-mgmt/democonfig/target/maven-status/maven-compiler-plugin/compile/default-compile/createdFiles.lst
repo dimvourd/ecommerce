@@ -1,0 +1,4 @@
+com\config\demo_config\BuildInfoController.class
+com\config\demo_config\PracticeBuildInfoController.class
+com\config\demo_config\BuildInfo.class
+com\config\demo_config\DemoConfigApplication.class
