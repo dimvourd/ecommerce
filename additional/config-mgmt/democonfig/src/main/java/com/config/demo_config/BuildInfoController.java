@@ -4,6 +4,7 @@ package com.config.demo_config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.info.BuildProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/build-info")
 @RequiredArgsConstructor
+@RefreshScope
 public class BuildInfoController {
 
 
@@ -52,11 +54,11 @@ public class BuildInfoController {
 @GetMapping
 public String getBuildInfo() {
 	return String.format("Build Id=%s%n, Build Name=%s%n, Build Version=%s", buildInfo.getId(), buildInfo.getName(), buildInfo.getVersion())
-			+ String.format("%nOS Info=%s", osInfo)
-			+ String.format("%nConfiguration environment ide Value=%s", terminalValue)
-			+ String.format("%nConfig From Properties=%s", configFromProperties)
-			+ String.format("%nArgument Param=%s", argumentsParam)
-			+ String.format("%nFrom VM Options=%s", fromVm)
+			+ String.format(",%nOS Info=%s", osInfo)
+			+ String.format(",%nConfiguration environment ide Value=%s", terminalValue)
+			+ String.format(",%nConfig From Properties=%s", configFromProperties)
+			+ String.format(",%nArgument Param=%s", argumentsParam)
+			+ String.format(",%nFrom VM Options=%s", fromVm)
 			;
 }
 
