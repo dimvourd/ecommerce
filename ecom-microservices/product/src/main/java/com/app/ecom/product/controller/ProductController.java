@@ -6,6 +6,8 @@ import com.app.ecom.product.service.ProductService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,9 +27,18 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
+@RefreshScope
 public class ProductController {
 
 	private final ProductService productService;
+
+	@Value("${message.randommessage}")
+	private String message;
+
+	@GetMapping("/message")
+	public ResponseEntity<String> getMessage() {
+		return new ResponseEntity<>(message, HttpStatus.OK);
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id) {

@@ -14,7 +14,7 @@ services:
     volumes:
       - postgres:/data/postgres
     networks:
-      - postgres
+      - backend
     restart: unless-stopped
 
 
@@ -30,12 +30,24 @@ services:
     ports:
       - "5050:80"
     networks:
-      - postgres
+      - backend
+    restart: unless-stopped
+  rabbitmq:
+    container_name: rabbitmq_container
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=ecom
+      - RABBITMQ_DEFAULT_PASS=ecom123
+    ports:
+      - "5672:5672" # -> RabbitMQ message broker
+      - "15672:15672" # RabbitMQ UI
+    networks:
+      - backend
     restart: unless-stopped
 
-
 networks:
-  postgres:
+  backend:
+    driver: bridge
 
 volumes:
   postgres:
