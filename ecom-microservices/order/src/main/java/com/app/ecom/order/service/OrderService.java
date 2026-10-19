@@ -25,7 +25,7 @@ public class OrderService {
 	private final OrderMapper orderMapper;
 
 	@Transactional
-	public OrderResponse createOrder(Long userId) {
+	public OrderResponse createOrder(String userId) {
 
 		// Validate the user
 //		User user = userService.fetchUser(userId);
@@ -60,7 +60,7 @@ public class OrderService {
 		);
 	}
 
-	public List<OrderResponse> getOrdersByUser(Long userId) {
+	public List<OrderResponse> getOrdersByUser(String userId) {
 
 		return repository.findByUserId(userId).stream()
 				.map(orderMapper::toOrderResponse)

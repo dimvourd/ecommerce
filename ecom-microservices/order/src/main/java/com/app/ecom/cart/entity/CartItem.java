@@ -32,7 +32,7 @@ public class CartItem {
 //	@JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
 //	private User user;
 
-	private Long userId;
+	private String userId;
 
 //	@ManyToOne(fetch = jakarta.persistence.FetchType.LAZY)
 //	@JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)

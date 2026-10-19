@@ -38,7 +38,7 @@ public class Order {
 //	@JoinColumn(name = "user_id",referencedColumnName = "id", nullable = false)
 //	private User user;
 
-	private Long userId;
+	private String userId;
 
 	@Enumerated(value = EnumType.STRING)
 	private OrderStatus status = OrderStatus.PENDING;

@@ -3,6 +3,8 @@ package com.app.ecom.cart.controller;
 
 import com.app.ecom.cart.entity.dto.CartItemResponse;
 import com.app.ecom.cart.service.CartItemService;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
@@ -27,20 +29,20 @@ public class CartItemController {
 	private final CartItemService service;
 
 	@GetMapping("/user")
-	public ResponseEntity<List<CartItemResponse>> getCart(@RequestHeader("X-User-ID") Long userId) {
+	public ResponseEntity<List<CartItemResponse>> getCart(@RequestHeader("X-User-ID") String userId) {
 		List<CartItemResponse> cartItemsByUser = service.getCartItemsByUser(userId);
 		return ResponseEntity.ok().body(cartItemsByUser);
 	}
 
 	@PostMapping("/add")
-	public ResponseEntity<Void> addToCart(@RequestHeader("X-User-ID") @NotNull Long userId,
+	public ResponseEntity<Void> addToCart(@RequestHeader("X-User-ID") @NotBlank String userId,
 	                                      @NotNull Long productId, @NotNull @Positive Integer quantity) {
 		service.addToCart(userId, productId, quantity);
 		return ResponseEntity.ok().build();
 	}
 
 	@DeleteMapping("/remove-products")
-	public ResponseEntity<Void> removeCartItem(@RequestHeader("X-User-ID") Long userId,
+	public ResponseEntity<Void> removeCartItem(@RequestHeader("X-User-ID") String userId,
 	                                           @RequestParam Long productId,
 	                                           @RequestParam(required = false) Integer quantity) {
 

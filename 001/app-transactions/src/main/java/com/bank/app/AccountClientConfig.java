@@ -1,5 +1,7 @@
 package com.bank.app;
 
+
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -10,8 +12,14 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 public class AccountClientConfig {
 
 	@Bean
-	public AccountClient accountClient() {
-		WebClient webClient = WebClient.create("http://localhost:8080");
+	@LoadBalanced
+	public WebClient.Builder webClientBuilder() {
+		return WebClient.builder();
+	}
+
+	@Bean
+	public AccountClient accountClient(@LoadBalanced WebClient.Builder builder) {
+		WebClient webClient = builder.baseUrl("http://app-account").build();
 
 		WebClientAdapter adapter = WebClientAdapter.create(webClient);
 

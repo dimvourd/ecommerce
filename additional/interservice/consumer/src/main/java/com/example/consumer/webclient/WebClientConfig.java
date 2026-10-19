@@ -1,5 +1,6 @@
 package com.example.consumer.webclient;
 
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -8,10 +9,16 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class WebClientConfig {
 
 	@Bean
-	public WebClient webClient() {
-		WebClient webClient = WebClient.builder()
-				.baseUrl("http://localhost:7979")
+	@LoadBalanced
+	public WebClient.Builder webClientBuilder() {
+		return WebClient.builder();
+	}
+
+	@Bean
+	public WebClient webClient(@LoadBalanced WebClient.Builder webClientBuilder) {
+
+		return webClientBuilder
+				.baseUrl("http://provider")
 				.build();
-		return webClient;
 	}
 }

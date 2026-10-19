@@ -13,7 +13,7 @@ public class WebClientController {
 
 	private final ProviderWebClient providerWebClient;
 
-	@GetMapping("/instance0info")
+	@GetMapping("/instance-info")
 	public Mono<String> instanceInfo() {
 
 		return providerWebClient.getInstanceInfo();

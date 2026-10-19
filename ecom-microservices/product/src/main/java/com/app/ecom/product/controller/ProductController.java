@@ -43,7 +43,7 @@ public class ProductController {
 	@GetMapping("/{id}")
 	public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id) {
 
-		return new ResponseEntity<>(productService.getProductResponseById(id), HttpStatus.OK);
+		return new ResponseEntity<>(productService.getActiveProductResponseById(id), HttpStatus.OK);
 	}
 
 	@GetMapping("/all")

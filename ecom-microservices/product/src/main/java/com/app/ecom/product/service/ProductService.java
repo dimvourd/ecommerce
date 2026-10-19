@@ -43,8 +43,12 @@ public class ProductService {
 		return mapper.toProductResponse(dbProduct);
 	}
 
-	public ProductResponse getProductResponseById(Long id) {
-		return mapper.toProductResponse(this.getProductById(id));
+	public ProductResponse getActiveProductResponseById(Long id) {
+		Product product = this.getProductById(id);
+		if(Boolean.TRUE.equals(product.getActive())) {
+			return mapper.toProductResponse(product);
+		}
+		throw new RuntimeException("Not active Product found: " + id);
 	}
 
 	@Transactional

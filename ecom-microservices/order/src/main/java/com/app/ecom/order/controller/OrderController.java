@@ -22,14 +22,14 @@ public class OrderController {
 	private final OrderService orderService;
 
 	@PostMapping
-	public ResponseEntity<OrderResponse> createOrder(@RequestHeader("X-User-ID") Long userId) {
+	public ResponseEntity<OrderResponse> createOrder(@RequestHeader("X-User-ID") String userId) {
 
 		return ResponseEntity.created(URI.create("/api/v1/orders"))
 				.body(orderService.createOrder(userId));
 	}
 
 	@GetMapping
-	public ResponseEntity<List<OrderResponse>> getOrdersByUser(@RequestHeader("X-User-ID") Long userId) {
+	public ResponseEntity<List<OrderResponse>> getOrdersByUser(@RequestHeader("X-User-ID") String userId) {
 
 		return ResponseEntity.ok(orderService.getOrdersByUser(userId));
 	}
