@@ -17,6 +17,13 @@ services:
       - backend
     restart: unless-stopped
 
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - backend
 
   pgadmin:
     container_name: pgadmin_container
